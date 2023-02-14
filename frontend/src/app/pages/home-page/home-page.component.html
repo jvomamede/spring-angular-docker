@@ -1,0 +1,81 @@
+<div class="container">
+
+  <form>
+
+    <div class="mb-3 row">
+
+      <label for="table-complete-search"
+        class="col-xs-3 col-sm-auto col-form-label">
+        Pesquise pelo CPF:
+      </label>
+
+      <div class="col-xs-3 col-sm-auto">
+        <input
+          id="table-complete-search"
+          type="text"
+          class="form-control"
+          name="searchTerm"
+          [(ngModel)]="clientService.searchTerm"
+        />
+      </div>
+
+      <span class="col col-form-label" *ngIf="clientService.loading$ | async">Loading...</span>
+
+      <select class="form-select" style="width: auto" name="pageSize"
+        [(ngModel)]="clientService.pageSize">
+        <option [ngValue]="2">2 items</option>
+        <option [ngValue]="4">4 items</option>
+        <option [ngValue]="6">6 items</option>
+      </select>
+
+    </div>
+
+    <table class="table table-striped">
+
+      <thead>
+
+        <tr>
+          <th scope="col" sortable="id" (sort)="onSort($event)">#</th>
+          <th scope="col" sortable="name" (sort)="onSort($event)">Nome</th>
+          <th scope="col" sortable="cpf" (sort)="onSort($event)">CPF</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let client of clients$ | async">
+
+          <td>
+            <ngb-highlight [result]="client.id | number" [term]="clientService.searchTerm"></ngb-highlight>
+          </td>
+
+          <td>
+            <ngb-highlight [result]="client.name" [term]="clientService.searchTerm"></ngb-highlight>
+          </td>
+
+          <td>
+            <ngb-highlight [result]="client.cpf" [term]="clientService.searchTerm"></ngb-highlight>
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+    <div class="d-flex justify-content-between p-2">
+
+      <ngb-pagination [collectionSize]="(total$ | async)!"
+        [(page)]="clientService.page"
+        [pageSize]="clientService.pageSize"
+        [rotate]="true" [ellipses]="false"
+        [boundaryLinks]="true">
+      </ngb-pagination>
+
+    </div>
+
+  </form>
+
+
+</div>
