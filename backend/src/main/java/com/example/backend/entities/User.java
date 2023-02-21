@@ -11,17 +11,27 @@ import java.util.List;
 
 
 @Entity
+@Table(name = "users")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "cpf", length = 11, unique = true)
+    private String cpf;
+
+    @Column(name = "phone")
+    private String phone;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "profile", nullable = false)
@@ -94,5 +104,29 @@ public class User implements UserDetails {
 
     public String getEmail() {
         return email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getName() {
+        return name;
     }
 }

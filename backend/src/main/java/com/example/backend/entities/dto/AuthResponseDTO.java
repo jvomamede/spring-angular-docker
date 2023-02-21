@@ -1,11 +1,12 @@
-package com.example.backend.security.auth;
+package com.example.backend.entities.dto;
 
-public class AuthResponse {
+public class AuthResponseDTO {
+
     private String token;
 
-    public AuthResponse() {}
+    public AuthResponseDTO() {}
 
-    public AuthResponse(String token) {
+    public AuthResponseDTO(String token) {
         this.token = token;
     }
 
@@ -16,4 +17,5 @@ public class AuthResponse {
     public void setToken(String token) {
         this.token = token;
     }
+
 }

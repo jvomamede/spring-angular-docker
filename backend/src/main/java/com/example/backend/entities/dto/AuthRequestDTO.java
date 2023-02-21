@@ -1,13 +1,13 @@
-package com.example.backend.security.auth;
+package com.example.backend.entities.dto;
 
-public class AuthRequest {
+public class AuthRequestDTO {
 
     private String email;
     private String password;
 
-    public AuthRequest() {}
+    public AuthRequestDTO() {}
 
-    public AuthRequest(String email, String password) {
+    public AuthRequestDTO(String email, String password) {
         this.password = password;
         this.email = email;
     }
@@ -27,4 +27,5 @@ public class AuthRequest {
     public String getEmail() {
         return email;
     }
+
 }

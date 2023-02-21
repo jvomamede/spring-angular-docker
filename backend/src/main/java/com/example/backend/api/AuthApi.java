@@ -1,9 +1,9 @@
 package com.example.backend.api;
 
-import com.example.backend.security.auth.AuthRequest;
-import com.example.backend.security.auth.AuthResponse;
-import com.example.backend.security.auth.AuthService;
-import com.example.backend.security.auth.RegisterRequest;
+import com.example.backend.entities.dto.AuthRequestDTO;
+import com.example.backend.entities.dto.AuthResponseDTO;
+import com.example.backend.entities.dto.RegisterRequestDTO;
+import com.example.backend.services.impl.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,20 +15,20 @@ import org.springframework.web.bind.annotation.*;
 public class AuthApi {
 
     @Autowired
-    private AuthService authService;
+    private AuthServiceImpl authService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(
-            @RequestBody RegisterRequest request
+    public ResponseEntity<AuthResponseDTO> register(
+            @RequestBody RegisterRequestDTO request
     ) {
-        AuthResponse response = this.authService.register(request);
+        AuthResponseDTO response = this.authService.register(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthResponse> authenticate(
-            @RequestBody AuthRequest request
+    public ResponseEntity<AuthResponseDTO> authenticate(
+            @RequestBody AuthRequestDTO request
     ) {
-        AuthResponse response = this.authService.authenticate(request);
+        AuthResponseDTO response = this.authService.authenticate(request);
         return ResponseEntity.ok(response);
     }
 
