@@ -30,6 +30,8 @@ public class SecurityConfiguration {
         http
                 .csrf()
                 .disable()
+                .requiresChannel(channel ->
+                        channel.anyRequest().requiresSecure())
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/**")
                 .permitAll()
