@@ -1,7 +1,6 @@
 package com.example.backend.entities.dto;
 
-import com.example.backend.enums.ProfileEnum;
-import jakarta.persistence.Column;
+import com.example.backend.enums.Roles;
 
 public class RegisterRequestDTO {
 
@@ -12,15 +11,15 @@ public class RegisterRequestDTO {
     private String cpf;
 
     private String phone;
-    private ProfileEnum profileEnum;
+    private Roles roles;
 
     public RegisterRequestDTO() {}
 
-    public RegisterRequestDTO(String email, String password, ProfileEnum profileEnum, String name,
+    public RegisterRequestDTO(String email, String password, Roles roles, String name,
                               String cpf, String phone) {
         this.email = email;
         this.password = password;
-        this.profileEnum = profileEnum;
+        this.roles = roles;
         this.name = name;
         this.cpf = cpf;
         this.phone = phone;
@@ -42,12 +41,12 @@ public class RegisterRequestDTO {
         this.email = email;
     }
 
-    public void setProfileEnum(ProfileEnum profileEnum) {
-        this.profileEnum = profileEnum;
+    public void setRoles(Roles profileEnum) {
+        this.roles = profileEnum;
     }
 
-    public ProfileEnum getProfileEnum() {
-        return profileEnum;
+    public Roles getRoles() {
+        return roles;
     }
 
     public String getCpf() {

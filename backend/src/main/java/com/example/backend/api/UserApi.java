@@ -23,17 +23,11 @@ public class UserApi {
     private UserServiceImpl userService;
 
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping
     public ResponseEntity<List<UserResponseDTO>> listUser() {
         List<UserResponseDTO> userResponseDTOS = this.userService.lisUser();
         return ResponseEntity.ok().body(userResponseDTOS);
-    }
-
-
-    @GetMapping("yserss")
-    public ResponseEntity<List<User>> listUsers() {
-        List<User> users = this.userService.lisUsers();
-        return ResponseEntity.ok().body(users);
     }
 
 }

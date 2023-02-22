@@ -1,6 +1,6 @@
 package com.example.backend.entities;
 
-import com.example.backend.enums.ProfileEnum;
+import com.example.backend.enums.Roles;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,43 +34,14 @@ public class User implements UserDetails {
     private String phone;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "profile", nullable = false)
-    private ProfileEnum profile;
+    @Column(name = "roles", nullable = false)
+    private Roles roles;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(profile.name()));
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
     public User() {}
 
-    public User(String email, String password, ProfileEnum profile) {
+    public User(String email, String password, Roles roles) {
         this.email = email;
-        this.profile = profile;
+        this.roles = roles;
         this.password = password;
     }
 
@@ -82,8 +53,8 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public void setProfile(ProfileEnum profile) {
-        this.profile = profile;
+    public void setRoles(Roles profile) {
+        this.roles = profile;
     }
 
     public void setId(Integer id) {
@@ -94,8 +65,8 @@ public class User implements UserDetails {
         return password;
     }
 
-    public ProfileEnum getProfile() {
-        return profile;
+    public Roles getRoles() {
+        return roles;
     }
 
     public Integer getId() {
@@ -129,4 +100,35 @@ public class User implements UserDetails {
     public String getName() {
         return name;
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(roles.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 }
